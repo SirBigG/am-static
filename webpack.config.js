@@ -1,6 +1,5 @@
 var path = require('path');
 var webpack = require('webpack');
-var BundleTracker = require('webpack-bundle-tracker');
 
 module.exports = {
     //the base directory (absolute path) for resolving the entry option
@@ -23,8 +22,6 @@ module.exports = {
     },
 
     plugins: [
-        //tells webpack where to store data about your bundles.
-        new BundleTracker({filename: './webpack-stats.json'}),
         //makes jQuery available in every module
         new webpack.ProvidePlugin({
             $: 'jquery',
