@@ -1,5 +1,5 @@
 {
-  "name": "AM Static",
+  "name": "am-static",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -38,6 +38,7 @@
     "babel-loader": "^6.2.4",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
+    "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.26.1",
     "file-loader": "^0.9.0",
     "node-sass": "^3.13.0",
