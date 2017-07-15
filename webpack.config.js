@@ -1,3 +1,4 @@
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 var path = require('path');
 var webpack = require('webpack');
 
@@ -15,10 +16,10 @@ module.exports = {
 
     output: {
         //where you want your compiled bundle to be stored
-        path: path.resolve('/static/bundles/'),
-        publicPath: '/static/bundles/',
+        path: path.resolve('/static/'),
+        publicPath: '/static/',
         //naming convention webpack should use for your files
-        filename: '[name].js'
+        filename: 'bundles/[name].js'
     },
 
     plugins: [
@@ -27,7 +28,12 @@ module.exports = {
             $: 'jquery',
             jQuery: 'jquery',
             'window.jQuery': 'jquery'
-        })
+        }),
+        new CopyWebpackPlugin([
+            { from: 'node_modules/bootstrap/dist/css/bootstrap.min.css', to: 'css/bootstrap.min.css' },
+            { from: 'node_modules/bootstrap/dist/css/bootstrap-theme.min.css', to: 'css/bootstrap-theme.min.css' },
+            { from: 'node_modules/bootstrap/dist/js/bootstrap.min.js', to: 'js/bootstrap.min.js' },
+            { from: 'node_modules/jquery/dist/jquery.min.js', to: 'js/jquery.min.js' }])
     ],
 
     module: {

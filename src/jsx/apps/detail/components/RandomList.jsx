@@ -24,8 +24,8 @@ var RandomList = React.createClass({
         var postNodes = this.state.data.map((post, i) => {
             return (<div className="col-xs-6 col-md-3" key={i}>
                           <div className="item_in_list">
-                            <img src={post.photo.image} className="img-rounded img-responsive" id="image-detail-list"/>
-                            <a href={post.url}><h5 className="text-center">{post.title}</h5></a>
+                            <a href={post.url}><img src={post.photo.image} className="img-rounded img-responsive" id="image-detail-list"/></a>
+                            <h5 className="text-center" style="overflow:auto;"><a href={post.url}>{post.title}</a></h5>
                           </div>
                       </div>)
         });
