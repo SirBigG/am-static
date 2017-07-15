@@ -1,6 +1,14 @@
 import React from 'react';
 import 'whatwg-fetch';
 
+
+const styles = {
+    title : {
+         overflow: 'auto'
+    }
+}
+
+
 var RandomList = React.createClass({
     getInitialState() {
         return {data: []};
@@ -25,7 +33,7 @@ var RandomList = React.createClass({
             return (<div className="col-xs-6 col-md-3" key={i}>
                           <div className="item_in_list">
                             <a href={post.url}><img src={post.photo.image} className="img-rounded img-responsive" id="image-detail-list"/></a>
-                            <h5 className="text-center" style="overflow:auto;"><a href={post.url}>{post.title}</a></h5>
+                            <h5 className="text-center" styles={[styles.title]}><a href={post.url}>{post.title}</a></h5>
                           </div>
                       </div>)
         });
