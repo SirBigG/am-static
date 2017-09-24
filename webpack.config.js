@@ -33,7 +33,9 @@ module.exports = {
             { from: 'node_modules/bootstrap/dist/css/bootstrap.min.css', to: 'css/bootstrap.min.css' },
             { from: 'node_modules/bootstrap/dist/css/bootstrap-theme.min.css', to: 'css/bootstrap-theme.min.css' },
             { from: 'node_modules/bootstrap/dist/js/bootstrap.min.js', to: 'js/bootstrap.min.js' },
-            { from: 'node_modules/jquery/dist/jquery.min.js', to: 'js/jquery.min.js' }])
+            { from: 'node_modules/jquery/dist/jquery.min.js', to: 'js/jquery.min.js' }]),
+        new webpack.optimize.CommonsChunkPlugin("bundles/init.js"),
+        new webpack.optimize.MinChunkSizePlugin({minChunkSize: 10000})
     ],
 
     module: {

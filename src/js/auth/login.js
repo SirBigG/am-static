@@ -29,8 +29,8 @@ var $ = require('jquery');
                     $('#auth-btn').html(
                         '<li>' +
                         '<button onclick="' + user_url + '" ' +
-                        'class="btn btn-primary navbar-btn"> Особистий кабінет </button> ' +
-                        '<button onclick="location.href=/logout/" class="btn btn-primary navbar-btn"> Вийти </button>' +
+                        'class="btn btn-primary navbar-btn"><i class="fa fa-user-circle fa-lg text-success"></i></button> ' +
+                        '<button onclick="location.href=/logout/" class="btn btn-primary navbar-btn"> <i class="fa fa-sign-out fa-lg text-danger"></i> </button>' +
                         '</li>'
                     );
                     $('.login-modal-lg').hide();

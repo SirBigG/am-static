@@ -1,10 +1,10 @@
 FROM node:6.10.2
 
-WORKDIR /src
-COPY package.json /src/
+WORKDIR /am-static
+COPY package.json /am-static/
 
 RUN npm install
 
-COPY . /src/
+COPY . /am-static/
 
 RUN npm run build
