@@ -26,12 +26,11 @@ var $ = require('jquery');
                 if(res.status === 'ok')
                 {
                     var user_url = "location.href='/user/" + res.user + "/'";
-                    $('#auth-btn').html(
-                        '<li>' +
-                        '<button onclick="' + user_url + '" ' +
-                        'class="btn btn-primary navbar-btn"><i class="fa fa-user-circle fa-lg text-success"></i></button> ' +
-                        '<button onclick="location.href=/logout/" class="btn btn-primary navbar-btn"> <i class="fa fa-sign-out fa-lg text-danger"></i> </button>' +
-                        '</li>'
+                    $('#auth-block').html(
+                        '<div class="nav-item m-1"><button onclick="' + user_url + '" ' +
+                        'class="btn btn-outline-success"><i class="fa fa-user-circle fa-lg text-success"></i></button></div> ' +
+                        '<div class="nav-item m-1"><button onclick="location.href=/logout/" class="btn btn-outline-danger">' +
+                        '<i class="fa fa-sign-out fa-lg text-danger"></i> </button></div>'
                     );
                     $('.login-modal-lg').hide();
                     $('body').removeClass('modal-open');

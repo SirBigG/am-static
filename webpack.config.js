@@ -1,6 +1,7 @@
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var path = require('path');
 var webpack = require('webpack');
+require('popper.js');
 
 module.exports = {
     //the base directory (absolute path) for resolving the entry option
@@ -27,13 +28,16 @@ module.exports = {
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
-            'window.jQuery': 'jquery'
+            'window.jQuery': 'jquery',
+            Popper: ['popper.js', 'default']
         }),
         new CopyWebpackPlugin([
             { from: 'node_modules/bootstrap/dist/css/bootstrap.min.css', to: 'css/bootstrap.min.css' },
-            { from: 'node_modules/bootstrap/dist/css/bootstrap-theme.min.css', to: 'css/bootstrap-theme.min.css' },
+            { from: 'node_modules/bootstrap/dist/css/bootstrap.min.css.map', to: 'css/bootstrap.min.css.map' },
             { from: 'node_modules/bootstrap/dist/js/bootstrap.min.js', to: 'js/bootstrap.min.js' },
-            { from: 'node_modules/jquery/dist/jquery.min.js', to: 'js/jquery.min.js' }]),
+            { from: 'node_modules/jquery/dist/jquery.min.js', to: 'js/jquery.min.js' },
+            { from: 'node_modules/popper.js/dist/umd/popper.min.js', to: 'js/popper.min.js' },
+            { from: 'node_modules/popper.js/dist/umd/popper.min.js.map', to: 'js/popper.min.js.map' }]),
         new webpack.optimize.CommonsChunkPlugin("bundles/init.js"),
         new webpack.optimize.MinChunkSizePlugin({minChunkSize: 10000})
     ],

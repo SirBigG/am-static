@@ -30,10 +30,10 @@ var RandomList = React.createClass({
     },
     render() {
         var postNodes = this.state.data.map((post, i) => {
-            return (<div className="col-xs-6 col-md-3" key={i}>
+            return (<div className="col-6 col-lg-3" key={i}>
                           <div className="item_in_list">
-                            <a href={post.url}><img src={post.photo.image} className="img-rounded img-responsive" id="image-detail-list"/></a>
-                            <h5 className="text-center" styles={[styles.title]}><a href={post.url}>{post.title}</a></h5>
+                            <a href={post.url}><img src={post.photo.image} className="img-rounded img-fluid" id="image-detail-list"/></a>
+                            <h5 className="text-center" style={{overflow: 'auto'}}><a href={post.url}>{post.title}</a></h5>
                           </div>
                       </div>)
         });
