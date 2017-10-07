@@ -1,0 +1,50 @@
+@import "~bootstrap/scss/functions";
+@import '~bootstrap/scss/mixins/hover';
+@import '~bootstrap/scss/variables';
+
+$navbar-green-color : #24A824;
+$navbar-green-focus-color : #13C813;
+
+.navbar-green {
+  .navbar-brand {
+    color: $navbar-green-color;
+
+    @include hover-focus {
+      color: $navbar-green-focus-color;
+    }
+  }
+
+  .navbar-nav {
+    .nav-link {
+      color: $navbar-green-focus-color;
+
+      @include hover-focus {
+        color: $navbar-green-focus-color;
+      }
+
+      &.disabled {
+        color: $navbar-green-focus-color;
+      }
+    }
+
+    .show > .nav-link,
+    .active > .nav-link,
+    .nav-link.show,
+    .nav-link.active {
+      color: $navbar-green-focus-color;
+    }
+  }
+
+  .navbar-toggler {
+    color: $navbar-green-focus-color;
+    border-color: $navbar-green-focus-color;
+  }
+
+  .navbar-toggler-icon {
+    background-image: $navbar-light-toggler-icon-bg;
+  }
+
+  .navbar-text {
+    color: $navbar-green-focus-color;
+  }
+}

@@ -13,28 +13,24 @@ const App = React.createClass({
     render() {
         return(
             <div>
-                <div className="col-md-3">
-                    <ul className="nav nav-pills nav-stacked">
-                        <li role="presentation">
-                            <a href={"/user/" + this.props.params.user_id + "/"}>
-                                <i className="fa fa-home fo-3x" aria-hidden="true"> Моя сторінка</i>
-                            </a>
-                        </li>
-                        <li role="presentation">
-                            <a href={"/user/" + this.props.params.user_id + "/update"}>
-                                <i className="fa fa-pencil fo-3x" aria-hidden="true"> Змінити дані</i>
-                            </a>
-                        </li>
-                        <li role="presentation">
-                            <a href={"/user/" + this.props.params.user_id + "/post/create"}>
-                                <i className="fa fa-newspaper-o fo-3x" aria-hidden="true"> Додати статтю</i>
-                            </a>
-                        </li>
-                    </ul>
+              <div className="row">
+                <div className="col-lg-3">
+                    <div className="nav flex-column nav-pills" role="tablist">
+                        <a className="nav-link" href={"/user/" + this.props.params.user_id + "/"} role="tab" aria-expanded="true">
+                            <i className="fa fa-home fa-lg" aria-hidden="true"> Моя сторінка</i>
+                        </a>
+                        <a className="nav-link" href={"/user/" + this.props.params.user_id + "/update"} role="tab" aria-expanded="true">
+                            <i className="fa fa-pencil fa-lg" aria-hidden="true"> Змінити дані</i>
+                        </a>
+                        <a className="nav-link" href={"/user/" + this.props.params.user_id + "/post/create"} role="tab" aria-expanded="true">
+                            <i className="fa fa-newspaper-o fa-lg" aria-hidden="true"> Додати статтю</i>
+                        </a>
+                    </div>
                 </div>
-                <div className="col-md-9">
+                <div className="col-lg-9">
                     {this.props.children}
                 </div>
+              </div>
             </div>
         )
     }
@@ -44,7 +40,7 @@ const PersonalIndex = React.createClass({
     render(){
         return(
             <div>
-                <PostList url="/api/user/posts/" grid="col-sm-6 col-md-6" />
+                <PostList url="/api/user/posts/" grid="col-6 col-lg-6" />
             </div>
         )
     }
