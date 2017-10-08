@@ -5,21 +5,29 @@ import {orderBy} from '../utils/filters'
 
 import ListPostItem from './ListPostItem'
 
-const PostList = React.createClass({
+class PostList extends React.Component {
 
-    getInitialState() {
-        return {data: undefined, previous: "", next: "", url: ""};
-    },
+    constructor(props) {
+        super(props)
+
+        this.state = {
+         data: undefined,
+         previous: "",
+         next: "",
+         url: ""
+        };
+    }
+
     componentWillReceiveProps(newProps) {
         this.setState({url: newProps.url});
-    },
+    }
     componentDidMount() {
         if (this.state.url){
             this.fetchData(this.state.url)
         } else {
             this.fetchData(this.props.url)
         }
-    },
+    }
     fetchData(url){
         fetch(url,
             {
@@ -37,20 +45,20 @@ const PostList = React.createClass({
                     }
             }
             );
-    },
+    }
     onNext(e){
         e.preventDefault();
         this.setState({url: this.state.next});
         this.fetchData(this.state.next);
         // TODO: maybe nicer solusion
         window.scrollTo(0, 0)
-    },
+    }
     onPrevious(e){
         e.preventDefault();
         this.setState({url: this.state.previous});
         this.fetchData(this.state.previous);
         window.scrollTo(0, 0)
-    },
+    }
     render() {
         if(!this.state.data){
             return (<div>
@@ -85,7 +93,7 @@ const PostList = React.createClass({
             </div>
         )
     }
-});
+};
 
 
 export default PostList;

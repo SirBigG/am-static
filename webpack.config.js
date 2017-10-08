@@ -12,7 +12,7 @@ module.exports = {
     entry: { main: './src/index.js',
              index: './src/jsx/apps/index/index.js',
              detail: './src/jsx/apps/detail/index.js',
-             personal: './src/jsx/apps/personal/index.js'
+             personal: './src/apps/personal/index.js'
     },
 
     output: {
@@ -37,9 +37,7 @@ module.exports = {
             { from: 'node_modules/bootstrap/dist/js/bootstrap.min.js', to: 'js/bootstrap.min.js' },
             { from: 'node_modules/jquery/dist/jquery.min.js', to: 'js/jquery.min.js' },
             { from: 'node_modules/popper.js/dist/umd/popper.min.js', to: 'js/popper.min.js' },
-            { from: 'node_modules/popper.js/dist/umd/popper.min.js.map', to: 'js/popper.min.js.map' }]),
-        new webpack.optimize.CommonsChunkPlugin("bundles/init.js"),
-        new webpack.optimize.MinChunkSizePlugin({minChunkSize: 10000})
+            { from: 'node_modules/popper.js/dist/umd/popper.min.js.map', to: 'js/popper.min.js.map' }])
     ],
 
     module: {
