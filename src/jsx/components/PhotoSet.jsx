@@ -25,7 +25,7 @@ const PhotoSet = React.createClass({
         // TODO: replace with array adding class and array lenghs props
         var ints = [1, 2, 3, 4];
         var fieldNodes = ints.map((number) => {
-            return <div className="col-md-3" key={number}>
+            return <div className="col-lg-3" key={number}>
                 <ImageUploadField image_url={this.state['image' + number]} name={'image' + number} onChange={this.handleImageChange.bind(this, 'image' + number)}/>
             </div>
             });

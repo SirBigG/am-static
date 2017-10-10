@@ -3,8 +3,8 @@ import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router'
 import React from 'react'
 import { render } from 'react-dom'
 
-import UserUpdateForm from '../../jsx/components/forms/UserUpdateForm';
-import UserPostForm from '../../jsx/components/forms/UserPostForm';
+import UserUpdateForm from './components/UserUpdateForm';
+import UserPostForm from './components/UserPostForm';
 import PostList from '../../jsx/components/PostList'
 import NotFound from '../../jsx/components/NotFound'
 

@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import GetCookieMixin from '../../mixins/GetCookieMixin';
-import FieldChangeHandlersMixin from '../../mixins/FieldChangeHandlersMixin';
-import InputField from '../fields/InputField';
-import TextField from '../fields/TextField';
-import SelectField from '../fields/SelectField';
-import PhotoSet from '../PhotoSet';
+import GetCookieMixin from '../../../jsx/mixins/GetCookieMixin';
+import FieldChangeHandlersMixin from '../../../jsx/mixins/FieldChangeHandlersMixin';
+import InputField from '../../../jsx/components/fields/InputField';
+import TextField from '../../../jsx/components/fields/TextField';
+import SelectField from '../../../jsx/components/fields/SelectField';
+import PhotoSet from '../../../jsx/components/PhotoSet';
 import 'whatwg-fetch';
 
 const fieldClass = "form-control";
@@ -72,11 +72,11 @@ var UserPostForm = React.createClass({
                              url="/api/categories/?level=1"/>
                 <PhotoSet errors={this.state.errors.photos}/>
                 <InputField type="char"
-                            name="Джерело"
-                            label="Заголовок"
+                            name="source"
+                            label="Джерело"
                             class={fieldClass}
                             errors={this.state.errors.source}/>
-                <button type="submit" className="btn btn-success btn-lg center-block" onClick={this.onSubmit}>Зберегти</button>
+                <button type="submit" className="btn btn-success" onClick={this.onSubmit}>Зберегти</button>
             </form>
         )
     }

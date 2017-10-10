@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import AutocompleteField from '../fields/AutocompleteField';
-import InputField from '../fields/InputField';
-import ImageUploadField from '../fields/ImageUploadField';
-import DatePickerField from '../fields/DatePickerField';
-import GetCookieMixin from '../../mixins/GetCookieMixin';
-import FieldChangeHandlersMixin from '../../mixins/FieldChangeHandlersMixin';
+import AutocompleteField from '../../../jsx/components/fields/AutocompleteField';
+import InputField from '../../../jsx/components/fields/InputField';
+import ImageUploadField from '../../../jsx/components/fields/ImageUploadField';
+import DatePickerField from '../../../jsx/components/fields/DatePickerField';
+import GetCookieMixin from '../../../jsx/mixins/GetCookieMixin';
+import FieldChangeHandlersMixin from '../../../jsx/mixins/FieldChangeHandlersMixin';
 import 'whatwg-fetch';
 
 
