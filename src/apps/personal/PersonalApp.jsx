@@ -8,25 +8,46 @@ import UserPostForm from './components/UserPostForm';
 import PostList from '../../jsx/components/PostList'
 import NotFound from '../../jsx/components/NotFound'
 
-import menu from './data/menu_uk.js'
+import { Sidebar, Segment, Button, Menu, Image, Icon, Header } from 'semantic-ui-react'
+
+import menu from './data/menu_uk.js';
 
 // TODO: create dynamic menu with active option
 class App extends React.Component {
+    constructor() {
+        super();
+        this.state = {visible: false};
+    }
+
+    toggleVisibility () {
+         this.setState({ visible: !this.state.visible })
+    }
+
     render() {
-        return(<div className="row">
-                  <div className="col-lg-3">
-                    <div className="nav flex-column nav-pills" role="tablist">
-                        {menu(this.props.params.user_id).map((menu, i) =>
-                            <a key={i} className="nav-link" href={menu.link} role="tab" aria-expanded="true">
-                               <i className={menu.icon} aria-hidden="true"> {menu.title}</i>
-                            </a>
-                         )}
-                    </div>
-                  </div>
-                  <div className="col-lg-9">
-                    {this.props.children}
-                  </div>
+        const { visible } = this.state
+        return(<div>
+        <Menu secondary>
+            <Menu.Item>AgroMega</Menu.Item>
+            <Menu.Item onClick={this.toggleVisibility.bind(this)}><Icon name="sidebar"/> Меню</Menu.Item>
+        </Menu>
+        <Sidebar.Pushable as={Segment}>
+          <Sidebar as={Menu} animation='uncover' width='wide' visible={visible} vertical color='red'>
+            {menu(this.props.params.user_id).map((menu, i) =>
+              <div key={i}>
+              <Menu.Item as={Link} name={menu.item} to={menu.link}>
+                <Icon name={menu.icon} size='large'/>
+                {menu.title}
+              </Menu.Item>
               </div>
+            )}
+          </Sidebar>
+          <Sidebar.Pusher>
+            <Segment basic>
+              {this.props.children}
+            </Segment>
+          </Sidebar.Pusher>
+        </Sidebar.Pushable>
+      </div>
         )
     }
 };

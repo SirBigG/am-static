@@ -3,17 +3,17 @@ var menu = (user_id) =>{
      {
        link: `/user/${ user_id }/`,
        title: 'Мої статті',
-       icon: 'fa fa-home fa-lg'
+       icon: 'home'
      },
      {
        link: `/user/${user_id}/update/`,
        title: 'Змінити дані',
-       icon: 'fa fa-pencil fa-lg'
+       icon: 'pencil'
      },
      {
        link: `/user/${user_id}/post/create/`,
        title: 'Додати статтю',
-       icon: 'fa fa-newspaper-o fa-lg'
+       icon: 'newspaper'
      }]
 }
 
