@@ -8,7 +8,7 @@ import UserPostForm from './components/UserPostForm';
 import PostList from '../../jsx/components/PostList'
 import NotFound from '../../jsx/components/NotFound'
 
-import { Sidebar, Segment, Button, Menu, Image, Icon, Header } from 'semantic-ui-react'
+import { Sidebar, Segment, Button, Menu, Image, Icon, Header, Responsive, Container } from 'semantic-ui-react'
 
 import menu from './data/menu_uk.js';
 
@@ -16,34 +16,50 @@ import menu from './data/menu_uk.js';
 class App extends React.Component {
     constructor() {
         super();
-        this.state = {visible: false};
+        var _state = {};
+        if (window.innerWidth > Responsive.onlyMobile.maxWidth)
+            _state = {
+                visible: true,
+                animation: 'uncover',
+                width: 'wide'
+            };
+        else
+           _state = {
+               visible: false,
+               animation: 'overlay',
+               width: 'thin'};
+
+        this.state = _state;
     }
 
     toggleVisibility () {
-         this.setState({ visible: !this.state.visible })
+         this.setState({
+              visible: !this.state.visible,
+              animation: this.state.animation,
+              width: this.state.width });
     }
 
     render() {
-        const { visible } = this.state
+        const { visible, animation, width } = this.state
         return(<div>
         <Menu secondary>
-            <Menu.Item>AgroMega</Menu.Item>
+            <Menu.Item color='green'>AgroMega</Menu.Item>
             <Menu.Item onClick={this.toggleVisibility.bind(this)}><Icon name="sidebar"/> Меню</Menu.Item>
         </Menu>
-        <Sidebar.Pushable as={Segment}>
-          <Sidebar as={Menu} animation='uncover' width='wide' visible={visible} vertical color='red'>
+        <Sidebar.Pushable as={Segment} >
+          <Sidebar as={Menu} animation={animation} width={width} visible={visible} vertical inverted>
             {menu(this.props.params.user_id).map((menu, i) =>
-              <div key={i}>
-              <Menu.Item as={Link} name={menu.item} to={menu.link}>
-                <Icon name={menu.icon} size='large'/>
+              <Menu.Item as={Link} name={menu.item} to={menu.link} color='green' index={i} key={i}>
+                <Icon name={menu.icon} size='large' color='green'/>
                 {menu.title}
               </Menu.Item>
-              </div>
             )}
           </Sidebar>
           <Sidebar.Pusher>
-            <Segment basic>
-              {this.props.children}
+            <Segment clearing>
+                <Container>
+                  {this.props.children}
+                </Container>
             </Segment>
           </Sidebar.Pusher>
         </Sidebar.Pushable>
@@ -56,7 +72,7 @@ class PersonalIndex extends React.Component {
     render(){
         return(
             <div>
-                <PostList url="/api/user/posts/" grid="col-6 col-lg-6" />
+                <PostList url="/api/user/posts/" columns={2} />
             </div>
         )
     }

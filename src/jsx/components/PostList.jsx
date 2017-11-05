@@ -5,6 +5,8 @@ import {orderBy} from '../utils/filters'
 
 import ListPostItem from './ListPostItem'
 
+import { Grid, Button } from 'semantic-ui-react'
+
 class PostList extends React.Component {
 
     constructor(props) {
@@ -68,28 +70,36 @@ class PostList extends React.Component {
             )
         }
         var postNodes = this.state.data.map((group, i) => {
-            return (<div className="row" key={i}>
-                      <ListPostItem group={group} grid_class={this.props.grid} />
-                   </div>)
+            return (
+                     <ListPostItem group={group} key={i}/>
+                   )
         });
         if(this.state.previous){
-            var previous = <button aria-label="Previous" type="submit"
-                                       className="btn btn-success btn-sm" onClick={this.onPrevious}>
-                <span aria-hidden="true">&laquo; Попередня</span></button>
+            var previous = <Button inverted color='green' onClick={this.onPrevious.bind(this)} size='tiny' floated='right'>
+                               &laquo; Попередня
+                           </Button>
         }
         if(this.state.next){
-            var next = <button type="submit" className="btn btn-success btn-sm"
-                                   onClick={this.onNext} aria-label="Next">
-                <span aria-hidden="true">Наступна &raquo;</span></button>
+            var next = <Button inverted color='green' onClick={this.onNext.bind(this)} size='tiny' floated='left'>
+                         Наступна &raquo;
+                       </Button>
         }
         return (
             <div>
-                <div id="items">
+                <Grid columns={this.props.columns} >
                     {postNodes}
-                </div>
-                <div className="text-center">
-                    {previous}   {next}
-                </div>
+                </Grid>
+
+                <Grid columns={2}>
+                   <Grid.Row>
+                      <Grid.Column>
+                        {previous}
+                      </Grid.Column>
+                      <Grid.Column>
+                         {next}
+                      </Grid.Column>
+                    </Grid.Row>
+                </Grid>
             </div>
         )
     }

@@ -2,20 +2,28 @@ import React from 'react';
 
 import {truncate} from '../utils/filters'
 
+import { Grid, Image, Card } from 'semantic-ui-react'
+
 
 class ListPostItem extends React.Component {
-    render() {
+    render() {;
         var groupNodes = this.props.group.map((post, i) => {
-            return <div className="item_in_list" key={ i }>
-                    <img src={post.photo.image} alt={ post.photo.description } id="image-list-size" className="img-rounded img-fluid" />
-                    <a href={ post.url }><h2 className="text-center">{ post.title }</h2></a>
-                    <div className="text-justify" dangerouslySetInnerHTML={{__html: truncate(post.text, 40) }} />
-                </div>
+            return <Grid.Column computer={6} mobile={16} key={i}>
+                    <Card>
+                       <Image src={post.photo.image} alt={ post.photo.description } fluid />
+                       <Card.Content>
+                         <Card.Header><a href={ post.url }>{ post.title }[</a></Card.Header>
+                         <Card.Description>
+                           <div dangerouslySetInnerHTML={{__html: truncate(post.text.replace(/<[^>]*>/g, ''), 40)}}/>
+                         </Card.Description>
+                       </Card.Content>
+                    </Card>
+                </Grid.Column>
             });
         return (
-            <div className={this.props.grid_class}>
+            <Grid.Row>
                 {groupNodes}
-            </div>
+            </Grid.Row>
         )
     }
 };
