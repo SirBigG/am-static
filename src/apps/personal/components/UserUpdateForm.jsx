@@ -8,13 +8,12 @@ import GetCookieMixin from '../../../jsx/mixins/GetCookieMixin';
 import FieldChangeHandlersMixin from '../../../jsx/mixins/FieldChangeHandlersMixin';
 import 'whatwg-fetch';
 
-
-const fieldClass = "form-control";
+import {Form, Button} from 'semantic-ui-react';
 
 var UserUpdateForm = React.createClass({
     mixins: [GetCookieMixin, FieldChangeHandlersMixin],
     getInitialState() {
-        return {data: [], errors: {}}
+        return {data: {}, errors: {}}
     },
     componentDidMount: function() {
         fetch("/api/users/" + this.props.params.user_id + "/",
@@ -60,62 +59,60 @@ var UserUpdateForm = React.createClass({
     },
     render() {
         return(
-            <form ref="form">
+            <Form ref="form">
                 <InputField type="email"
                             value={this.state.data.email}
                             name="email"
                             label="Email"
-                            class={fieldClass}
+                            width={10}
                             errors={this.state.errors.email}
                             onChange={this.handleTextChange.bind(this, 'email')}/>
-                <InputField type="char"
+                <InputField type="text"
                             value={this.state.data.first_name}
                             name="first_name"
                             label="Ім’я"
-                            class={fieldClass} 
+                            width={10}
                             errors={this.state.errors.first_name}
                             onChange={this.handleTextChange.bind(this, 'first_name')}/>
-                <InputField type="char"
+                <InputField type="text"
                             value={this.state.data.last_name}
                             name="last_name"
                             label="Прізвище"
-                            class={fieldClass}
+                            width={10}
                             errors={this.state.errors.last_name}
                             onChange={this.handleTextChange.bind(this, 'last_name')}/>
                 <DatePickerField value={this.state.data.birth_date}
                                  name="birth_date"
                                  label="Дата народження"
-                                 class={fieldClass}
                                  errors={this.state.errors.birth_date}
                                  onChange={this.handleTextChange.bind(this, 'birth_date')}/>
-                <InputField type="char"
+                <InputField type="text"
                             value={this.state.data.phone1}
                             name="phone1"
                             label="Телефон"
-                            class={fieldClass}
+                            width={10}
                             errors={this.state.errors.phone1}
                             onChange={this.handleTextChange.bind(this, 'phone1')}/>
-                <InputField type="char"
+                <InputField type="text"
                             value={this.state.data.phone2}
                             name="phone2"
                             label="Інший телефон"
-                            class={fieldClass}
+                            width={10}
                             errors={this.state.errors.phone2} 
                             onChange={this.handleTextChange.bind(this, 'phone2')}/>
                 <AutocompleteField url="/api/locations/" 
                                    valueDefault={this.state.data.location} 
                                    name="location" 
-                                   label="Місце" 
-                                   class={fieldClass}
+                                   label="Місце"
+                                   width={10}
                                    errors={this.state.errors.location}/>
                 <ImageUploadField name="avatar"
                                   image_url={this.state.data.avatar_url}
                                   errors={this.state.errors.avatar}
-                                  width="200"
-                                  height="200"
+                                  size='medium'
                                   onChange={this.handleImageChange.bind(this, 'avatar_url')}/>
-                    <button type="submit" className="btn btn-success btn-lg center-block" onClick={this.onSubmit}>Зберегти</button>
-            </form>
+                    <Form.Field control={Button} type="submit" color="green" onClick={this.onSubmit} style={{marginTop: "10px"}}>Зберегти</Form.Field>
+            </Form>
         )
     }
 });

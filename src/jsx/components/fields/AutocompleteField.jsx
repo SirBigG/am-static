@@ -1,35 +1,47 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import FieldErrorsMixin from '../../mixins/FieldErrorsMixin';
-var _ = require('lodash');
+
+import 'whatwg-fetch';
+
+import {Icon, Input, Image, Form, Dropdown} from 'semantic-ui-react';
 
 // TODO: create nice styles for component
 // TODO: creating help text rendering
 // TODO: scroll cursor up to top. Need to fix
 // TODO: handler for form state changing because after save render previous value
-var ulStyle = {
+var styles = {
     overflow: 'hidden',
-    overflowY: 'scroll'
+    overflowY: 'scroll',
+    display: 'none',
+    zIndex: 10
 };
 
 var AutocompleteField = React.createClass({
     mixins: [FieldErrorsMixin],
     getInitialState() {
-        return {data: [], next: "", value: "", scrollData: [], options: [], selectClass: ' hidden', defValue: ""};
+        return {data: [], next: "", value: "", scrollData: [], options: [], defValue: ""};
     },
     componentWillReceiveProps(newProps) {
         this.setState({value: newProps.valueDefault.value, defValue:newProps.valueDefault.pk});
     },
-    onChange(event) {
+    onChange(event, value) {
         this.setState({value: event.target.value});
-        this.delayCallback()
-    },
-    onClick(value){
-        this.setState({value: value, selectClass: ' hidden'});
+        fetch(this.props.url + '?loc=' + event.target.value,
+            {
+                method: 'GET'}).then(
+                (response) => {
+                    if (response.status === 200){
+                         response.json().then((json) => {
+                            this.setState({next: json.next});
+                            this.setOptions(json.results)
+                         });
+                }
+                })
     },
     onInputClick(e){
         e.preventDefault();
-        this.setState({selectClass: ''})
+        styles.display = '';
     },
     onScroll(event){
         event.preventDefault();
@@ -40,71 +52,39 @@ var AutocompleteField = React.createClass({
                 cache: false,
                 success: function (data) {
                     this.setState({scrollData: data.results, next: data.next});
-                    this.createOptions(this.state.scrollData)
                 }.bind(this)
             });
             el.scrollTop = el.scrollHeight;
         }
     },
-    componentWillMount() {
-        $.ajax({
-                url: this.props.url,
-                cache: false,
-                success: function (data) {
-                    this.setState({data: data.results, next: data.next});
-                    this.createOptions(this.state.data)
-                }.bind(this)
-        });
-        this.delayCallback = _.debounce(() => {
-            var url = this.props.url + '?loc=' + this.state.value;
-            $.ajax({
-                url: url,
-                cache: false,
-                success: function (data) {
-                    this.setState({data: data.results, next: data.next});
-                    this.state.options = [];
-                    this.createOptions(this.state.data)
-                }.bind(this)
-            })}, 1000);
+    setOptions(data){
+        console.log(data.map((item)=> {return {key:item.pk, value: item.pk, text: item.value}}))
+        this.setState({options: data.map((item)=> {return {key:item.pk, value: item.pk, text: item.value}})})
     },
-    createOptions(data){
-        return (data.map((item) => {
-            return(
-                this.state.options.push(
-                    <option value={ item.pk } key={ item.pk } onClick={this.onClick.bind(this, item.value)}>
-                        { item.value }
-                    </option>
-                )
-            )}
-            )
-        )
+
+    componentWillMount() {
+        fetch(this.props.url,
+              {
+                method: 'GET'
+              }
+        ).then(
+            (response) => {
+                if (response.status === 200) {
+                   response.json().then((json) => {
+                      this.setState({next: json.next});
+                      this.setOptions(json.results);
+                   })
+                }
+            }
+        );
     },
     render() {
         var errors = this.renderErrors(this.props.errors);
-        return(
-            <div className="form-group">
-                <label>{this.props.label}</label>
-                {errors}
-                <input type="text" id="dropdown-input"
-                       autoComplete="off"
-                       data-toggle="dropdown"
-                       aria-haspopup="true" 
-                       aria-expanded="true"
-                       onChange={this.onChange}
-                       value={this.state.value}
-                       className={this.props.class}
-                       onClick={this.onInputClick}/>
-                <select ref="scrollDropdawn"
-                    name={this.props.name}
-                    className={this.props.class + this.state.selectClass}
-                    role="menu"
-                    style={ulStyle}
-                    size="5"
-                    onScroll={this.onScroll}
-                    value={this.state.defValue}>
-                    {this.state.options}
-                </select>
-            </div>
+        return(<div className="ten wide field">
+         <Dropdown placeholder='Виберіть місто' fluid search selection
+          options={this.state.options}
+          onSearchChange={this.onChange} value={this.state.defValue} text={this.state.value}/>
+        </div>
         )
     }
 });

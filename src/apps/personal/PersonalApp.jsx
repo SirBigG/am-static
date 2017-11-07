@@ -8,28 +8,22 @@ import UserPostForm from './components/UserPostForm';
 import PostList from '../../jsx/components/PostList'
 import NotFound from '../../jsx/components/NotFound'
 
-import { Sidebar, Segment, Button, Menu, Image, Icon, Header, Responsive, Container } from 'semantic-ui-react'
+import { Sidebar, Segment, Button, Menu, Image, Icon, Header, Responsive, Container } from 'semantic-ui-react';
 
 import menu from './data/menu_uk.js';
+
+
+const sidebarInitial = {
+                    mobile: {visible: false, animation: 'overlay', width: 'thin'},
+                    computer: {visible: true, animation: 'uncover', width: 'wide'}
+               }
 
 // TODO: create dynamic menu with active option
 class App extends React.Component {
     constructor() {
         super();
-        var _state = {};
-        if (window.innerWidth > Responsive.onlyMobile.maxWidth)
-            _state = {
-                visible: true,
-                animation: 'uncover',
-                width: 'wide'
-            };
-        else
-           _state = {
-               visible: false,
-               animation: 'overlay',
-               width: 'thin'};
-
-        this.state = _state;
+        var isMobile = window.innerWidth <= Responsive.onlyMobile.maxWidth;
+        this.state = isMobile ? sidebarInitial.mobile : sidebarInitial.computer;
     }
 
     toggleVisibility () {
@@ -42,9 +36,9 @@ class App extends React.Component {
     render() {
         const { visible, animation, width } = this.state
         return(<div>
-        <Menu secondary>
-            <Menu.Item color='green'>AgroMega</Menu.Item>
+        <Menu size='huge' secondary>
             <Menu.Item onClick={this.toggleVisibility.bind(this)}><Icon name="sidebar"/> Меню</Menu.Item>
+            <Menu.Item as={Link} to={'/'} color='green'>AgroMega</Menu.Item>
         </Menu>
         <Sidebar.Pushable as={Segment} >
           <Sidebar as={Menu} animation={animation} width={width} visible={visible} vertical inverted>

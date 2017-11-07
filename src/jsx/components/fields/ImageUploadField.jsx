@@ -1,6 +1,7 @@
 import React from 'react';
 import FieldErrorsMixin from '../../mixins/FieldErrorsMixin';
 
+import {Icon, Input, Image, Form} from 'semantic-ui-react'
 
 const ImageUploadField = React.createClass ({
     
@@ -17,22 +18,24 @@ const ImageUploadField = React.createClass ({
   render() {
       let $imagePreview = null;
       if (this.state.imagePreviewUrl) {
-          $imagePreview = (<img src={this.state.imagePreviewUrl} className="img-fluid" width={this.props.width}
-          height={this.props.height}/>);
+          $imagePreview = (<Image src={this.state.imagePreviewUrl} size={this.props.size}/>);
       } else {
           $imagePreview = "";
       }
       var errors = this.renderErrors(this.props.errors);
       return (
-          <div className="form-group">
-              <label className="btn btn-success d-flex justify-content-center" htmlFor={this.props.name}>
-                  <i className="fa fa-plus-circle fa-lg" aria-hidden="true"> Додати фото</i>
+          <div>
+              <Form.Field width={4}>
+              <label className="ui green button" htmlFor={this.props.name} style={{marginTop: '10px'}}>
+                  <Icon name="plus circle" size='large'/> Додати фото
               </label>
-              <input type="file"
-                         onChange={this.props.onChange}
-                         className="form-control-file invisible"
-                         name={this.props.name}
-                         id={this.props.name}  />
+              <Input type="file"
+                     onChange={this.props.onChange}
+                     className='hidden'
+                     name={this.props.name}
+                     id={this.props.name}
+                     style={{display: 'none'}} />
+              </Form.Field>
               {errors}
               <div className="imgPreview">
                   {$imagePreview}
