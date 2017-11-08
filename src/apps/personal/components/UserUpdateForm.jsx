@@ -50,7 +50,7 @@ var UserUpdateForm = React.createClass({
                     if(response.status === 400){
                         response.json().then((json) => {this.setState({errors: json})})
                     } else if (response.status === 200){
-                        this.setState({errors: {}});
+
                         alert('Зміни успішно збережено');
                     }
                 }
@@ -103,7 +103,8 @@ var UserUpdateForm = React.createClass({
                 <AutocompleteField url="/api/locations/" 
                                    valueDefault={this.state.data.location} 
                                    name="location" 
-                                   label="Місце"
+                                   label="Локація"
+                                   placeholder="Виберіть місто"
                                    width={10}
                                    errors={this.state.errors.location}/>
                 <ImageUploadField name="avatar"

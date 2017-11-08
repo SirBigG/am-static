@@ -17,8 +17,6 @@ const InputField = React.createClass({
                 <input type={this.props.type}
                        value={this.props.value}
                        name={this.props.name}
-
-                       id={this.props.id}
                        error={error}
                        />
                 { errors }

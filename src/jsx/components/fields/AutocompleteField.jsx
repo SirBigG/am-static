@@ -4,28 +4,20 @@ import FieldErrorsMixin from '../../mixins/FieldErrorsMixin';
 
 import 'whatwg-fetch';
 
-import {Icon, Input, Image, Form, Dropdown} from 'semantic-ui-react';
+import {Form, Dropdown} from 'semantic-ui-react';
 
-// TODO: create nice styles for component
 // TODO: creating help text rendering
 // TODO: scroll cursor up to top. Need to fix
-// TODO: handler for form state changing because after save render previous value
-var styles = {
-    overflow: 'hidden',
-    overflowY: 'scroll',
-    display: 'none',
-    zIndex: 10
-};
-
+// TODO: scroll fix
 var AutocompleteField = React.createClass({
     mixins: [FieldErrorsMixin],
     getInitialState() {
-        return {data: [], next: "", value: "", scrollData: [], options: [], defValue: ""};
+        return {next: "", value: "", scrollData: [], options: [], defValue: ""};
     },
     componentWillReceiveProps(newProps) {
         this.setState({value: newProps.valueDefault.value, defValue:newProps.valueDefault.pk});
     },
-    onChange(event, value) {
+    onSearchChange(event, value) {
         this.setState({value: event.target.value});
         fetch(this.props.url + '?loc=' + event.target.value,
             {
@@ -39,9 +31,15 @@ var AutocompleteField = React.createClass({
                 }
                 })
     },
-    onInputClick(e){
-        e.preventDefault();
-        styles.display = '';
+    onChange(e, item){
+        if (item.value){
+          this.state.options.map((_item) =>{
+             if (_item.value === item.value){
+                this.setState({defValue:_item.value, value: _item.text})
+                return
+             }
+          })
+        }
     },
     onScroll(event){
         event.preventDefault();
@@ -81,9 +79,22 @@ var AutocompleteField = React.createClass({
     render() {
         var errors = this.renderErrors(this.props.errors);
         return(<div className="ten wide field">
-         <Dropdown placeholder='Виберіть місто' fluid search selection
+        <Form.Field>
+          <label>{this.props.label}</label>
+                <input type="text"
+                       value={this.state.defValue}
+                       name={this.props.name}
+                       id={this.props.id}
+                       style={{display: "none"}}
+                       />
+        </Form.Field>
+         <Dropdown
+          placeholder={this.props.placeholder} fluid search selection
           options={this.state.options}
-          onSearchChange={this.onChange} value={this.state.defValue} text={this.state.value}/>
+          onSearchChange={this.onSearchChange}
+          onChange={this.onChange}
+          value={this.state.defValue}
+          text={this.state.value}/>
         </div>
         )
     }
