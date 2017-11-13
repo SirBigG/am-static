@@ -58,7 +58,7 @@ var UserUpdateForm = React.createClass({
 
     },
     render() {
-        let width = window.innerWidth <= Responsive.onlyMobile.maxWidth ? 16 : 10
+        let width = window.innerWidth <= Responsive.onlyMobile.maxWidth ? 16 : 12
         return(
             <Form ref="form">
                 <InputField type="email"

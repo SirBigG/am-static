@@ -1,6 +1,8 @@
 import React from 'react';
 import FieldErrorsMixin from '../../mixins/FieldErrorsMixin';
 
+import {Form} from 'semantic-ui-react';
+
 // TODO: nice error rendering now not work right
 // TODO: nice load with react now it ugly
 // TODO: adding locale switcher for element if multilanguage done
@@ -23,7 +25,7 @@ const TextField = React.createClass({
         var errors = this.renderErrors(this.props.errors);
         
         return(
-            <div className="form-group">
+            <Form.Field width={this.props.width}>
                 <label>{this.props.label}</label>
                 <textarea value={this.state.value}
                           name={this.props.name}
@@ -34,7 +36,7 @@ const TextField = React.createClass({
                           rows={this.props.rows}
                           />
                 { errors }
-            </div>
+            </Form.Field>
         )
     }
 });

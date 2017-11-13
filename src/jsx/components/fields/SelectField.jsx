@@ -2,6 +2,8 @@ import React from 'react';
 import FieldErrorsMixin from '../../mixins/FieldErrorsMixin';
 import 'whatwg-fetch';
 
+import {Form} from 'semantic-ui-react';
+
 const SelectField = React.createClass({
     mixins: [FieldErrorsMixin],
     getInitialState() {
@@ -26,7 +28,7 @@ const SelectField = React.createClass({
         var errors = this.renderErrors(this.props.errors);
         
         return(
-            <div className="form-group">
+            <Form.Field width={this.props.width}>
                 <label>{this.props.label}</label>
                 <select
                     name={this.props.name}
@@ -36,7 +38,7 @@ const SelectField = React.createClass({
                     {options}
                 </select>
                 { errors }
-            </div>
+            </Form.Field>
         )
     }
 });

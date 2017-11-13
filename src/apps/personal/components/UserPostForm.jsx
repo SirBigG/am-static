@@ -8,7 +8,7 @@ import SelectField from '../../../jsx/components/fields/SelectField';
 import PhotoSet from '../../../jsx/components/PhotoSet';
 import 'whatwg-fetch';
 
-const fieldClass = "form-control";
+import {Form, Button, Responsive} from 'semantic-ui-react';
 
 var UserPostForm = React.createClass({
     mixins: [GetCookieMixin, FieldChangeHandlersMixin],
@@ -51,33 +51,34 @@ var UserPostForm = React.createClass({
 
     },
     render() {
+        let width = window.innerWidth <= Responsive.onlyMobile.maxWidth ? 16 : 12
         return(
-            <form ref="postForm">
-                <InputField type="char"
+            <Form ref="postForm">
+                <InputField type="text"
                             name="title"
                             label="Заголовок"
-                            class={fieldClass}
+                            width={width}
                             errors={this.state.errors.title}/>
                 <TextField name="text"
                            label="Текст"
-                           class={fieldClass}
                            errors={this.state.errors.text}
                            cols="5"
                            rows="5"
-                           height="450"/>
+                           height="450"
+                           width={width}/>
                 <SelectField name="rubric"
                              label="Категорія"
-                             class={fieldClass}
+                             width={width}
                              errors={this.state.errors.rubric}
                              url="/api/categories/?level=1"/>
                 <PhotoSet errors={this.state.errors.photos}/>
-                <InputField type="char"
+                <InputField type="text"
                             name="source"
                             label="Джерело"
-                            class={fieldClass}
+                            width={width}
                             errors={this.state.errors.source}/>
-                <button type="submit" className="btn btn-success" onClick={this.onSubmit}>Зберегти</button>
-            </form>
+                <Form.Field control={Button} type="submit" color="green" onClick={this.onSubmit} style={{marginTop: "10px"}}>Зберегти</Form.Field>
+            </Form>
         )
     }
 });

@@ -23,7 +23,7 @@ const ImageUploadField = React.createClass ({
           $imagePreview = "";
       }
       var errors = this.renderErrors(this.props.errors);
-      let width = window.innerWidth <= Responsive.onlyMobile.maxWidth ? 16 : 2
+      let width = window.innerWidth <= Responsive.onlyMobile.maxWidth ? 16 : 3
       return (
           <div>
               <Form.Field width={width}>

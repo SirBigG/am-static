@@ -3,6 +3,8 @@ import React from 'react';
 import ImageUploadField from './fields/ImageUploadField'
 import FieldErrorsMixin from '../mixins/FieldErrorsMixin';
 
+import { Grid} from 'semantic-ui-react'
+
 const PhotoSet = React.createClass({
     mixins: [FieldErrorsMixin],
     getInitialState(){
@@ -25,16 +27,16 @@ const PhotoSet = React.createClass({
         // TODO: replace with array adding class and array lenghs props
         var ints = [1, 2, 3, 4];
         var fieldNodes = ints.map((number) => {
-            return <div className="col-lg-3" key={number}>
-                <ImageUploadField image_url={this.state['image' + number]} name={'image' + number} onChange={this.handleImageChange.bind(this, 'image' + number)}/>
-            </div>
+            return <Grid.Column key={number}>
+                <ImageUploadField size='medium' image_url={this.state['image' + number]} name={'image' + number} onChange={this.handleImageChange.bind(this, 'image' + number)}/>
+            </Grid.Column>
             });
         return (
             <div>
                 {errors}
-                <div className="row">
+                <Grid.Row>
                     {fieldNodes}
-                </div>
+                </Grid.Row>
             </div>
         )
     }
