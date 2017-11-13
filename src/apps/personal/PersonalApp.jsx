@@ -22,8 +22,11 @@ const sidebarInitial = {
 class App extends React.Component {
     constructor() {
         super();
-        var isMobile = window.innerWidth <= Responsive.onlyMobile.maxWidth;
-        this.state = isMobile ? sidebarInitial.mobile : sidebarInitial.computer;
+        this.state = this.isMobile() ? sidebarInitial.mobile : sidebarInitial.computer;
+    }
+
+    isMobile(){
+        return window.innerWidth <= Responsive.onlyMobile.maxWidth
     }
 
     toggleVisibility () {
@@ -35,11 +38,16 @@ class App extends React.Component {
 
     render() {
         const { visible, animation, width } = this.state
-        return(<div>
-        <Menu size='huge' secondary>
+        let headerMenu = ""
+        if (this.isMobile()){
+            headerMenu = <Menu size='huge' secondary>
             <Menu.Item onClick={this.toggleVisibility.bind(this)}><Icon name="sidebar"/> Меню</Menu.Item>
             <Menu.Item as={Link} to={'/'} color='green'>AgroMega</Menu.Item>
         </Menu>
+        }
+
+        return(<div>
+        {headerMenu}
         <Sidebar.Pushable as={Segment} >
           <Sidebar as={Menu} animation={animation} width={width} visible={visible} vertical inverted>
             {menu(this.props.params.user_id).map((menu, i) =>

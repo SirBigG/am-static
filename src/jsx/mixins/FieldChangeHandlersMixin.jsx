@@ -9,6 +9,13 @@ const FieldChangeHandlersMixin = {
             this.setState({data: currentData})
         }
     },
+    handleDatepickerChange(name, event){
+       let currentData = this.state.data;
+        if (event._d) {
+            currentData[name] = event._d.toLocaleFormat("%Y-%m-%d");
+            this.setState({data: currentData})
+        }
+    },
     handleImageChange(name, event) {
         event.preventDefault();
         let reader = new FileReader();

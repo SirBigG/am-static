@@ -8,7 +8,7 @@ import GetCookieMixin from '../../../jsx/mixins/GetCookieMixin';
 import FieldChangeHandlersMixin from '../../../jsx/mixins/FieldChangeHandlersMixin';
 import 'whatwg-fetch';
 
-import {Form, Button} from 'semantic-ui-react';
+import {Form, Button, Responsive} from 'semantic-ui-react';
 
 var UserUpdateForm = React.createClass({
     mixins: [GetCookieMixin, FieldChangeHandlersMixin],
@@ -58,46 +58,47 @@ var UserUpdateForm = React.createClass({
 
     },
     render() {
+        let width = window.innerWidth <= Responsive.onlyMobile.maxWidth ? 16 : 10
         return(
             <Form ref="form">
                 <InputField type="email"
                             value={this.state.data.email}
                             name="email"
                             label="Email"
-                            width={10}
+                            width={width}
                             errors={this.state.errors.email}
                             onChange={this.handleTextChange.bind(this, 'email')}/>
                 <InputField type="text"
                             value={this.state.data.first_name}
                             name="first_name"
                             label="Ім’я"
-                            width={10}
+                            width={width}
                             errors={this.state.errors.first_name}
                             onChange={this.handleTextChange.bind(this, 'first_name')}/>
                 <InputField type="text"
                             value={this.state.data.last_name}
                             name="last_name"
                             label="Прізвище"
-                            width={10}
+                            width={width}
                             errors={this.state.errors.last_name}
                             onChange={this.handleTextChange.bind(this, 'last_name')}/>
                 <DatePickerField value={this.state.data.birth_date}
                                  name="birth_date"
                                  label="Дата народження"
                                  errors={this.state.errors.birth_date}
-                                 onChange={this.handleTextChange.bind(this, 'birth_date')}/>
+                                 onChange={this.handleDatepickerChange.bind(this, 'birth_date')}/>
                 <InputField type="text"
                             value={this.state.data.phone1}
                             name="phone1"
                             label="Телефон"
-                            width={10}
+                            width={width}
                             errors={this.state.errors.phone1}
                             onChange={this.handleTextChange.bind(this, 'phone1')}/>
                 <InputField type="text"
                             value={this.state.data.phone2}
                             name="phone2"
                             label="Інший телефон"
-                            width={10}
+                            width={width}
                             errors={this.state.errors.phone2} 
                             onChange={this.handleTextChange.bind(this, 'phone2')}/>
                 <AutocompleteField url="/api/locations/" 
@@ -105,7 +106,7 @@ var UserUpdateForm = React.createClass({
                                    name="location" 
                                    label="Локація"
                                    placeholder="Виберіть місто"
-                                   width={10}
+                                   width={width}
                                    errors={this.state.errors.location}/>
                 <ImageUploadField name="avatar"
                                   image_url={this.state.data.avatar_url}

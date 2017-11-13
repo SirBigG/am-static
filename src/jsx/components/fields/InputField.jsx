@@ -14,10 +14,11 @@ const InputField = React.createClass({
         return(
             <Form.Field width={this.props.width}>
                 <label>{this.props.label}</label>
-                <input type={this.props.type}
+                <Input type={this.props.type}
                        value={this.props.value}
                        name={this.props.name}
                        error={error}
+                       onChange={this.props.onChange}
                        />
                 { errors }
             </Form.Field>

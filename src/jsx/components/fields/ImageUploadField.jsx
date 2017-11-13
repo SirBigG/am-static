@@ -1,7 +1,7 @@
 import React from 'react';
 import FieldErrorsMixin from '../../mixins/FieldErrorsMixin';
 
-import {Icon, Input, Image, Form} from 'semantic-ui-react'
+import {Icon, Input, Image, Form, Responsive} from 'semantic-ui-react'
 
 const ImageUploadField = React.createClass ({
     
@@ -23,9 +23,10 @@ const ImageUploadField = React.createClass ({
           $imagePreview = "";
       }
       var errors = this.renderErrors(this.props.errors);
+      let width = window.innerWidth <= Responsive.onlyMobile.maxWidth ? 16 : 2
       return (
           <div>
-              <Form.Field width={4}>
+              <Form.Field width={width}>
               <label className="ui green button" htmlFor={this.props.name} style={{marginTop: '10px'}}>
                   <Icon name="plus circle" size='large'/> Додати фото
               </label>
