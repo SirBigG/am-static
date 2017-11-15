@@ -50,6 +50,12 @@ class App extends React.Component {
         {headerMenu}
         <Sidebar.Pushable as={Segment} >
           <Sidebar as={Menu} animation={animation} width={width} visible={visible} vertical inverted>
+            <Header as='h2' icon textAlign='center'>
+                <Icon name='user' circular color={'green'} />
+                <Header.Content>
+                     <a href='/' target='_self'><span className='ui blue'>Agro</span><span className='ui yellow'>Mega</span></a>
+                </Header.Content>
+            </Header>
             {menu(this.props.params.user_id).map((menu, i) =>
               <Menu.Item as={Link} name={menu.item} to={menu.link} color='green' index={i} key={i}>
                 <Icon name={menu.icon} size='large' color='green'/>
@@ -58,7 +64,7 @@ class App extends React.Component {
             )}
           </Sidebar>
           <Sidebar.Pusher>
-            <Segment clearing>
+            <Segment style={{minHeight: window.innerHeight + 'px'}}>
                 <Container>
                   {this.props.children}
                 </Container>

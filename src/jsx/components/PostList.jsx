@@ -74,6 +74,8 @@ class PostList extends React.Component {
                      <ListPostItem group={group} key={i}/>
                    )
         });
+
+
         if(this.state.previous){
             var previous = <Button inverted color='green' onClick={this.onPrevious.bind(this)} size='tiny' floated='right'>
                                &laquo; Попередня
