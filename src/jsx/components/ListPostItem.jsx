@@ -12,9 +12,9 @@ class ListPostItem extends React.Component {
                     <Card>
                        <Image src={post.photo.image} alt={ post.photo.description } fluid />
                        <Card.Content>
-                         <Card.Header><a href={ post.url }>{ post.title }[</a></Card.Header>
+                         <Card.Header textAlign={'center'}><a href={ post.url }>{ post.title }</a></Card.Header>
                          <Card.Description>
-                           <div dangerouslySetInnerHTML={{__html: truncate(post.text.replace(/<[^>]*>/g, ''), 40)}}/>
+                           <div style={{textAlign: 'justify'}} dangerouslySetInnerHTML={{__html: truncate(post.text.replace(/<[^>]*>/g, ''), 40)}}/>
                          </Card.Description>
                        </Card.Content>
                     </Card>
