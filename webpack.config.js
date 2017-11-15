@@ -9,8 +9,10 @@ module.exports = {
     //the entry point we created earlier. Note that './' means
     //your current directory. You don't have to specify the extension  now,
     //because you will specify extensions later in the `resolve` section
-    entry: {
-             personal: './src/apps/personal/index.js'
+    entry: {main: './src/index.js',
+            index: './src/jsx/apps/index/index.js',
+            detail: './src/jsx/apps/detail/index.js',
+            personal: './src/apps/personal/index.js'
     },
 
     output: {
@@ -28,7 +30,14 @@ module.exports = {
             jQuery: 'jquery',
             'window.jQuery': 'jquery',
             Popper: ['popper.js', 'default']
-        })
+        }),
+        new CopyWebpackPlugin([
+            { from: 'node_modules/bootstrap/dist/css/bootstrap.min.css', to: 'css/bootstrap.min.css' },
+            { from: 'node_modules/bootstrap/dist/css/bootstrap.min.css.map', to: 'css/bootstrap.min.css.map' },
+            { from: 'node_modules/bootstrap/dist/js/bootstrap.min.js', to: 'js/bootstrap.min.js' },
+            { from: 'node_modules/jquery/dist/jquery.min.js', to: 'js/jquery.min.js' },
+            { from: 'node_modules/popper.js/dist/umd/popper.min.js', to: 'js/popper.min.js' },
+            { from: 'node_modules/popper.js/dist/umd/popper.min.js.map', to: 'js/popper.min.js.map' }])
     ],
 
     module: {
