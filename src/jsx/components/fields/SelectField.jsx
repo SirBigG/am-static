@@ -22,7 +22,7 @@ const SelectField = React.createClass({
     render() {
         var options = this.state.data.map((item) => {
             return <option value={ item.pk } key={ item.pk }>
-                        { item.value }
+                        { item[this.props.value_attr] }
                     </option>
         });
         var errors = this.renderErrors(this.props.errors);

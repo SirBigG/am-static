@@ -16,15 +16,29 @@ const DatePickerField = React.createClass({
 
     render() {
         var errors = this.renderErrors(this.props.errors);
-        return(
-            <Form.Field>
-                <label>{this.props.label}</label>
-                <DatePicker
+        var date_picker;
+        if (this.props.time){
+              date_picker = <DatePicker
+                    selected={moment(this.props.value)}
+                    onChange={this.props.onChange}
+                    value={this.props.value}
+                    name={this.props.name}
+                    showTimeSelect
+                    timeFormat="HH:mm"
+                    timeIntervals={15}
+                    dateFormat="YYYY-MM-DD" />
+        } else {
+            date_picker = <DatePicker
                     selected={moment(this.props.value)}
                     onChange={this.props.onChange}
                     value={this.props.value}
                     name={this.props.name}
                     dateFormat="YYYY-MM-DD" />
+        }
+        return(
+            <Form.Field>
+                <label>{this.props.label}</label>
+                {date_picker}
                 { errors }
             </Form.Field>
         )

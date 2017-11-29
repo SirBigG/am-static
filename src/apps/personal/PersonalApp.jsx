@@ -1,10 +1,11 @@
-import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router'
+import { Router, Route, Link, browserHistory, IndexRoute, IndexLink } from 'react-router'
 
 import React from 'react'
 import { render } from 'react-dom'
 
 import UserUpdateForm from './components/UserUpdateForm';
 import UserPostForm from './components/UserPostForm';
+import EventForm from './components/EventForm';
 import PostList from '../../jsx/components/PostList'
 import NotFound from '../../jsx/components/NotFound'
 
@@ -18,7 +19,6 @@ const sidebarInitial = {
                     computer: {visible: true, animation: 'uncover', width: 'wide'}
                }
 
-// TODO: create dynamic menu with active option
 class App extends React.Component {
     constructor() {
         super();
@@ -57,8 +57,8 @@ class App extends React.Component {
                 </Header.Content>
             </Header>
             {menu(this.props.params.user_id).map((menu, i) =>
-              <Menu.Item as={Link} name={menu.item} to={menu.link} color='green' index={i} key={i}>
-                <Icon name={menu.icon} size='large' color='green'/>
+              <Menu.Item as={i === 0 ? IndexLink : Link} name={menu.item} activeClassName="active" to={menu.link} color='green' index={i} key={i}>
+                <Icon name={menu.icon} size='large' color='olive'/>
                 {menu.title}
               </Menu.Item>
             )}
@@ -89,10 +89,11 @@ class PersonalIndex extends React.Component {
 
 render((
   <Router history={browserHistory}>
-    <Route path="/user/:user_id/" component={App}>
+    <Route path="/profile/" component={App}>
         <IndexRoute component={PersonalIndex} />
         <Route path="update" component={UserUpdateForm}/>
-        <Route path="post/create" component={UserPostForm}/>
+        <Route path="create/post" component={UserPostForm}/>
+        <Route path="create/event" component={EventForm}/>
         <Route path="*" component={NotFound} />
     </Route>
   </Router>

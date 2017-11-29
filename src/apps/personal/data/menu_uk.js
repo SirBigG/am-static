@@ -1,19 +1,24 @@
 var menu = (user_id) =>{
      return [
      {
-       link: `/user/${ user_id }/`,
+       link: `/profile/`,
        title: 'Мої статті',
        icon: 'home'
      },
      {
-       link: `/user/${user_id}/update/`,
+       link: `/profile/update/`,
        title: 'Змінити дані',
-       icon: 'pencil'
+       icon: 'edit'
      },
      {
-       link: `/user/${user_id}/post/create/`,
+       link: `/profile/create/post/`,
        title: 'Додати статтю',
        icon: 'newspaper'
+     },
+     {
+       link: `/profile/create/event/`,
+       title: 'Додати подію',
+       icon: 'pencil'
      }]
 }
 

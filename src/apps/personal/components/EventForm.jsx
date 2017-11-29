@@ -5,29 +5,24 @@ import FieldChangeHandlersMixin from '../../../jsx/mixins/FieldChangeHandlersMix
 import InputField from '../../../jsx/components/fields/InputField';
 import TextField from '../../../jsx/components/fields/TextField';
 import SelectField from '../../../jsx/components/fields/SelectField';
-import PhotoSet from '../../../jsx/components/PhotoSet';
+import AutocompleteField from '../../../jsx/components/fields/AutocompleteField';
+import DatePickerField from '../../../jsx/components/fields/DatePickerField';
+import ImageUploadField from '../../../jsx/components/fields/ImageUploadField';
 import 'whatwg-fetch';
 
 import {Form, Button, Responsive} from 'semantic-ui-react';
 
-var UserPostForm = React.createClass({
+var EventForm = React.createClass({
     mixins: [GetCookieMixin, FieldChangeHandlersMixin],
     getInitialState() {
-        return {data: [], errors: {}}
+        return {errors: {}}
     },
     onSubmit(e){
         e.preventDefault();
-        var formData = new FormData(ReactDOM.findDOMNode(this.refs.postForm));
-        var nums = [1,2,3,4];
+        var formData = new FormData(ReactDOM.findDOMNode(this.refs.eventForm));
         var value = CKEDITOR.instances['text'].getData();
         formData.append('text', value);
-        nums.map((i) => {
-            if (formData.get('image'+i)) {
-                formData.append('photos', formData.get('image' + i))
-            }
-            formData.delete('image'+i)
-        });
-        fetch("/api/user/posts/",
+        fetch("/api/event/create/",
             {
                 method: 'POST',
                 credentials: 'same-origin',
@@ -53,7 +48,7 @@ var UserPostForm = React.createClass({
     render() {
         let width = window.innerWidth <= Responsive.onlyMobile.maxWidth ? 16 : 12
         return(
-            <Form ref="postForm">
+            <Form ref="eventForm">
                 <InputField type="text"
                             name="title"
                             label="Заголовок"
@@ -66,18 +61,37 @@ var UserPostForm = React.createClass({
                            rows="5"
                            height="450"
                            width={width}/>
-                <SelectField name="rubric"
+                <AutocompleteField url="/api/locations/"
+                                   name="location"
+                                   label="Локація"
+                                   placeholder="Виберіть місто"
+                                   width={width}
+                                   errors={this.state.errors.location}/>
+                <InputField type="text"
+                            name="address"
+                            label="Адреса"
+                            width={width}
+                            errors={this.state.errors.address}/>
+                <SelectField name="type"
                              label="Категорія"
                              width={width}
-                             value_attr='value'
-                             errors={this.state.errors.rubric}
-                             url="/api/categories/?level=1"/>
-                <PhotoSet errors={this.state.errors.photos}/>
-                <InputField type="text"
-                            name="source"
-                            label="Джерело"
-                            width={width}
-                            errors={this.state.errors.source}/>
+                             value_attr="title"
+                             errors={this.state.errors.type}
+                             url="/api/event_types/">
+                <ImageUploadField name="poster"
+                                  errors={this.state.errors.poster}
+                                  size="medium"
+                                  onChange={this.handleImageChange.bind(this, "poster")}/>
+                <DatePickerField name="start"
+                                 label="Дата початку"
+                                 errors={this.state.errors.start}
+                                 time={true}
+                                 onChange={this.handleDatepickerChange.bind(this, "start")}/>
+                <DatePickerField name="stop"
+                                 label="Дата кінця"
+                                 time={true}
+                                 errors={this.state.errors.stop}
+                                 onChange={this.handleDatepickerChange.bind(this, "stop")}/>
                 <Form.Field control={Button} type="submit" color="green" onClick={this.onSubmit} style={{marginTop: "10px"}}>Зберегти</Form.Field>
             </Form>
         )
@@ -85,4 +99,4 @@ var UserPostForm = React.createClass({
 });
 
 
-export default UserPostForm;
+export default EventForm;

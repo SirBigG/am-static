@@ -16,7 +16,7 @@ var UserUpdateForm = React.createClass({
         return {data: {}, errors: {}}
     },
     componentDidMount: function() {
-        fetch("/api/users/" + this.props.params.user_id + "/",
+        fetch("/api/users/",
             {
                 method: 'GET',
                 credentials: 'same-origin',
@@ -35,7 +35,7 @@ var UserUpdateForm = React.createClass({
     },
     onSubmit(e){
         e.preventDefault();
-        fetch("/api/users/" + this.props.params.user_id + "/",
+        fetch("/api/users/",
             {
                 method: 'PUT',
                 credentials: 'same-origin',

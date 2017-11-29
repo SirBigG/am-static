@@ -25,9 +25,8 @@ var $ = require('jquery');
                 // TODO: need profile button creating
                 if(res.status === 'ok')
                 {
-                    var user_url = "location.href='/user/" + res.user + "/'";
-                    $('#auth-block').html(
-                        '<div class="nav-item m-1"><button onclick="' + user_url + '" ' +
+                    $('.auth-block').html(
+                        '<div class="nav-item m-1"><button onclick="location.href=/profile/" ' +
                         'class="btn btn-outline-success"><i class="fa fa-user-circle fa-lg text-success"></i></button></div> ' +
                         '<div class="nav-item m-1"><button onclick="location.href=/logout/" class="btn btn-outline-danger">' +
                         '<i class="fa fa-sign-out fa-lg text-danger"></i> </button></div>'
