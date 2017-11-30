@@ -1,4 +1,4 @@
-
+import moment from "moment";
 
 const FieldChangeHandlersMixin = {
     handleTextChange(name, event) {
@@ -12,7 +12,14 @@ const FieldChangeHandlersMixin = {
     handleDatepickerChange(name, event){
        let currentData = this.state.data;
         if (event._d) {
-            currentData[name] = event._d.toLocaleFormat("%Y-%m-%d");
+            currentData[name] = moment(event._d).format("YYYY-MM-DD");
+            this.setState({data: currentData})
+        }
+    },
+    handleDateTimePickerChange(name, event){
+       let currentData = this.state.data;
+        if (event._d) {
+            currentData[name] = moment(event._d).format("YYYY-MM-DD HH:mm");
             this.setState({data: currentData})
         }
     },

@@ -15,7 +15,7 @@ import {Form, Button, Responsive} from 'semantic-ui-react';
 var EventForm = React.createClass({
     mixins: [GetCookieMixin, FieldChangeHandlersMixin],
     getInitialState() {
-        return {errors: {}}
+        return {data:{}, errors: {}}
     },
     onSubmit(e){
         e.preventDefault();
@@ -47,6 +47,7 @@ var EventForm = React.createClass({
     },
     render() {
         let width = window.innerWidth <= Responsive.onlyMobile.maxWidth ? 16 : 12
+        let defValue = {pk: "", value:""};
         return(
             <Form ref="eventForm">
                 <InputField type="text"
@@ -62,6 +63,7 @@ var EventForm = React.createClass({
                            height="450"
                            width={width}/>
                 <AutocompleteField url="/api/locations/"
+                                   valueDefault={defValue}
                                    name="location"
                                    label="Локація"
                                    placeholder="Виберіть місто"
@@ -77,22 +79,26 @@ var EventForm = React.createClass({
                              width={width}
                              value_attr="title"
                              errors={this.state.errors.type}
-                             url="/api/event_types/">
+                             url="/api/event_types/"/>
                 <ImageUploadField name="poster"
+                                  image_url={this.state.data.poster}
                                   errors={this.state.errors.poster}
                                   size="medium"
                                   onChange={this.handleImageChange.bind(this, "poster")}/>
                 <DatePickerField name="start"
+                                 value={this.state.data.start}
                                  label="Дата початку"
                                  errors={this.state.errors.start}
                                  time={true}
-                                 onChange={this.handleDatepickerChange.bind(this, "start")}/>
+                                 onChange={this.handleDateTimePickerChange.bind(this, "start")}/>
                 <DatePickerField name="stop"
+                                 value={this.state.data.stop}
                                  label="Дата кінця"
                                  time={true}
                                  errors={this.state.errors.stop}
-                                 onChange={this.handleDatepickerChange.bind(this, "stop")}/>
-                <Form.Field control={Button} type="submit" color="green" onClick={this.onSubmit} style={{marginTop: "10px"}}>Зберегти</Form.Field>
+                                 onChange={this.handleDateTimePickerChange.bind(this, "stop")}/>
+                <Form.Field control={Button} type="submit" color="green" 
+                onClick={this.onSubmit} style={{marginTop: "10px"}}>Додати</Form.Field>
             </Form>
         )
     }
