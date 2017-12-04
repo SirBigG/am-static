@@ -58,7 +58,7 @@ class App extends React.Component {
             </Header>
             {menu(this.props.params.user_id).map((menu, i) =>
               <Menu.Item as={i === 0 ? IndexLink : Link} name={menu.item} activeClassName="active" to={menu.link} color='green' index={i} key={i}>
-                <Icon name={menu.icon} size='large' color='olive'/>
+                <Icon name={menu.icon} size='large'/>
                 {menu.title}
               </Menu.Item>
             )}
