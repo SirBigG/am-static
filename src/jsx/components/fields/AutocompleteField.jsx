@@ -56,7 +56,6 @@ var AutocompleteField = React.createClass({
         }
     },
     setOptions(data){
-        console.log(data.map((item)=> {return {key:item.pk, value: item.pk, text: item.value}}))
         this.setState({options: data.map((item)=> {return {key:item.pk, value: item.pk, text: item.value}})})
     },
 

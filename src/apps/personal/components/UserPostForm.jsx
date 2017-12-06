@@ -22,7 +22,7 @@ var UserPostForm = React.createClass({
         var value = CKEDITOR.instances['text'].getData();
         formData.append('text', value);
         nums.map((i) => {
-            if (formData.get('image'+i)) {
+            if (formData.get('image'+i).name) {
                 formData.append('photos', formData.get('image' + i))
             }
             formData.delete('image'+i)
