@@ -1,4 +1,4 @@
-FROM node:6.14.3-alpine
+FROM node:6.14.3
 
 WORKDIR /am-static
 ADD package.json /am-static/
