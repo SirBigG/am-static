@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SirBigG/golub_portal.git"
+    "url": "git+https://github.com/SirBigG/"
   },
-  "author": "Andrii Gots",
+  "author": "Andrii Hots",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/SirBigG/golub_portal/issues"
+    "url": "https://github.com/SirBigG/"
   },
-  "homepage": "https://github.com/SirBigG/golub_portal#readme",
+  "homepage": "https://github.com/SirBigG/",
   "description": "",
   "dependencies": {
     "bootstrap": "^4.0.0-beta",
