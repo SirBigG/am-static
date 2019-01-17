@@ -10,7 +10,7 @@ class ListPostItem extends React.Component {
         var groupNodes = this.props.group.map((post, i) => {
             return <Grid.Column computer={6} mobile={16} key={i}>
                     <Card>
-                       <Image src={post.photo.image} alt={ post.photo.description } fluid />
+                       <Image src={post.photo ? post.photo.image : ""} alt={post.photo ? post.photo.description : "" } fluid />
                        <Card.Content>
                          <Card.Header textAlign={'center'}><a href={ post.url }>{ post.title }</a></Card.Header>
                          <Card.Description>
