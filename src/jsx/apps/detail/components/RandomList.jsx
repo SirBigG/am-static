@@ -1,19 +1,47 @@
 import React from 'react';
 import 'whatwg-fetch';
 
+import Fingerprint2 from 'fingerprintjs2';
+import GetCookieMixin from "../../../mixins/GetCookieMixin";
 
 const styles = {
     title : {
          overflow: 'auto'
     }
-}
+};
 
 
 var RandomList = React.createClass({
+    mixins: [GetCookieMixin],
     getInitialState() {
         return {data: []};
     },
     componentDidMount() {
+        Fingerprint2.get((components)=> {
+            console.log(components);
+            const fingerprint = Fingerprint2.x64hash128(components.map(function (pair:any) { return pair.value; }).join(), 31);
+            fetch('/api/post/view/',
+            {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": this.getCookie("csrftoken"),
+                },
+                body: JSON.stringify({"fingerprint": fingerprint,
+                    "post_id": parseInt(document.getElementById('comment').className)})
+            }
+        )
+            .then(
+                (response) => {
+                    if(response.status === 200){
+
+                    console.log("success view");
+                }
+                }
+            );
+		});
+
         fetch('/api/post/random/all/',
             {
                 method: 'GET',
@@ -27,6 +55,9 @@ var RandomList = React.createClass({
                     }
             }
             );
+    },
+    componentWillUnmount(){
+
     },
     render() {
         var postNodes = this.state.data.map((post, i) => {

@@ -52,7 +52,7 @@ var ReviewsApp = React.createClass({
         // TODO: creating average reviews
         return(
             <div id="review__app">
-                <p class="h4 text-success">Залишити відгук:</p>
+                <p className="h4 text-success">Залишити відгук:</p>
                 <div className="review-info"></div>
                 <div className="review-form">
                     {reviewForm}
