@@ -13,12 +13,13 @@ const styles = {
 
 var RandomList = React.createClass({
     mixins: [GetCookieMixin],
+
     getInitialState() {
         return {data: []};
     },
+
     componentDidMount() {
         Fingerprint2.get((components)=> {
-            console.log(components);
             const fingerprint = Fingerprint2.x64hash128(components.map(function (pair:any) { return pair.value; }).join(), 31);
             fetch('/api/post/view/',
             {
@@ -35,8 +36,7 @@ var RandomList = React.createClass({
             .then(
                 (response) => {
                     if(response.status === 200){
-
-                    console.log("success view");
+                       console.log("success view");
                 }
                 }
             );
@@ -56,9 +56,7 @@ var RandomList = React.createClass({
             }
             );
     },
-    componentWillUnmount(){
 
-    },
     render() {
         var postNodes = this.state.data.map((post, i) => {
             return (<div className="col-6 col-lg-3" key={i}>
